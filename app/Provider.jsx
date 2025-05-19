@@ -8,6 +8,7 @@
 
         const [user,setUser] = useState(null);
         useEffect(()=>{
+            console.log("create user is working fine rn")
             CreateNewUser();
         },[]) 
 
