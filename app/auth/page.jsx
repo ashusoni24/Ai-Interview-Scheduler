@@ -1,6 +1,6 @@
 'use client';
 import { Button } from '@/components/ui/button'
-import { supabase } from '@/services/supabseclient'
+import { supabase } from '@/services/supabseClient'
 import Image from 'next/image'
 import React from 'react'
 
