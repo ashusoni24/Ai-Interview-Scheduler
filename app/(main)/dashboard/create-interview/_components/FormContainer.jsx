@@ -1,6 +1,6 @@
 import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import {
   Select,
   SelectContent,
@@ -8,26 +8,49 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select"
-import { INterviewType } from '@/services/Constants'
+import { InterviewType } from '@/services/Constants'
 import { Button } from '@/components/ui/button'
 import { ArrowRight } from 'lucide-react'
+import { Item } from '@radix-ui/react-select'
 
 
 
-function FormContainer() {
+function FormContainer({onHandleInputChange}) {
+
+    const[interviewType,setInterviewType] = useState([]);
+    useEffect(()=>{
+        if(interviewType){
+            onHandleInputChange('type',interviewType)
+        }
+    },[interviewType])
+
+    const AddInterviewType =(type) => {
+         const data = interviewType.includes(type);
+         if(!data){
+            setInterviewType(prev => [...prev,type]);
+         }else{
+            const result = interviewType.filter(item => item != type);
+            setInterviewType(result);
+         }
+    }
+
   return (
     <div className='p-5 border-2 rounded-xl'>
         <div>
             <h2 className='text-sm font-bold'>Job Position</h2>
-            <Input placeholder ="e.g. Full Stack Developer" className="mt-2"/>
+            <Input placeholder ="e.g. Full Stack Developer" className='mt-2'
+            onChange={(event)=>onHandleInputChange('jobPosition',event.target.value)}
+            />
         </div>
          <div className='mt-5'>
             <h2 className='text-sm font-bold'>Job Description</h2>
-            <Textarea placeholder ="Enter deails of Job description" className="h-[200px] mt-2"/>
+            <Textarea placeholder ="Enter deails of Job description" className="h-[200px] mt-2"
+             onChange={(event)=>onHandleInputChange('jobDescription',event.target.value)}
+           />
         </div>
          <div className='mt-5'>
             <h2 className='text-sm font-bold'>Interview Duration</h2>
-            <Select>
+            <Select onValueChange ={(value)=>onHandleInputChange('Duration',value)}>
             <SelectTrigger className="w-full mt-2">
                 <SelectValue placeholder="Duration" />
             </SelectTrigger>
@@ -44,9 +67,13 @@ function FormContainer() {
         <div className='mt-5'>
             <h2 className='text-sm font-bold'>Interview Type</h2>
             <div className='flex gap-3 flex-wrap mt-2'>
-                {INterviewType.map((type,index)=>(
-                    <div key={index} className='flex items-center cursor-pointer gap-2 p-1 px-2  border rounded-2xl
-                    hover:bg-secondary'>
+                {InterviewType.map((type,index)=>(
+                    <div key={index} 
+                    className={`flex items-center cursor-pointer gap-2 p-1 px-2  border rounded-2xl
+                    hover:bg-secondary
+                     ${interviewType.includes(type.title) &&'bg-blue-100 '}`}
+                    onClick={()=> AddInterviewType(type.title)}
+                    >
                          <type.icon className='h-4 w-4'/>
                          <span>{type.title}</span>
                     </div>

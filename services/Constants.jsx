@@ -28,7 +28,7 @@ export const SidebarOptions = [
     }
 
 ]
-export const INterviewType = [{
+export const InterviewType = [{
     title : 'Technical',
     icon : Code2Icon
 },
