@@ -36,7 +36,7 @@ export function AppSidebar() {
                             <SidebarMenuButton asChild className={`p-4 ${path == options.path&&'bg-blue-50'}`}> 
                                <Link href={options.path}>
                                 <options.icon className={`text-[16px] ${path == options.path && 'text-primary'}`} />
-                                <span className={`text-[16px]font-medium ${path == options.path && 'text-primary'}`}>{options.name}</span>
+                                <span className={`text-[16px] ${path == options.path && 'text-primary'}`}>{options.name}</span>
                                 </Link>
                             </SidebarMenuButton>
                         </SidebarMenuItem>
