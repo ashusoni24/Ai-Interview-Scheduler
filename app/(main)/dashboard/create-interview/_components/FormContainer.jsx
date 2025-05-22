@@ -15,7 +15,7 @@ import { Item } from '@radix-ui/react-select'
 
 
 
-function FormContainer({onHandleInputChange}) {
+function FormContainer({onHandleInputChange,GoToNext}) {
 
     const[interviewType,setInterviewType] = useState([]);
     useEffect(()=>{
@@ -50,7 +50,7 @@ function FormContainer({onHandleInputChange}) {
         </div>
          <div className='mt-5'>
             <h2 className='text-sm font-bold'>Interview Duration</h2>
-            <Select onValueChange ={(value)=>onHandleInputChange('Duration',value)}>
+            <Select onValueChange ={(value)=>onHandleInputChange('duration',value)}>
             <SelectTrigger className="w-full mt-2">
                 <SelectValue placeholder="Duration" />
             </SelectTrigger>
@@ -80,7 +80,7 @@ function FormContainer({onHandleInputChange}) {
                 ))}
             </div>
         </div>
-        <div className='mt-7 flex justify-end'>
+        <div className='mt-7 flex justify-end' onClick={()=>GoToNext()}>
         <Button>Generate Question <ArrowRight /> </Button>
         </div>
         

@@ -1,6 +1,7 @@
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Provider from "./Provider"; // ✅ IMPORT YOUR CONTEXT PROVIDER
+import { Toaster } from "@/components/ui/sonner";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -26,6 +27,8 @@ export default function RootLayout({ children }) {
         {/* ✅ WRAP CHILDREN WITH <Provider> */}
         <Provider>
           {children}
+          <Toaster/>
+
         </Provider>
       </body>
     </html>
