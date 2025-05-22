@@ -1,13 +1,19 @@
 import { Button } from '@/components/ui/button';
 import axios from 'axios';
-import { Loader2Icon } from 'lucide-react';
+import { Loader2, Loader2Icon } from 'lucide-react';
 import React, { useEffect, useState } from 'react';
 import { toast } from 'sonner';
+import QuestionListContainer from './QuestionListContainer';
+import { supabase } from '@/services/supabseClient';
+import { useUser } from '@/app/Provider';
+import { v4 as uuidv4 } from 'uuid';
 
 function QuestionList({ formData }) {
 
   const [loading, setLoading] = useState(true);
   const [questionList, setQuestionlist] = useState();
+  const {user} = useUser();
+  const [saveLoading ,setSaveLoading] = useState(false);
 
   useEffect(() => {
     if (formData) {
@@ -40,8 +46,22 @@ function QuestionList({ formData }) {
       setLoading(false);
     }
   }
-  const onFinish =()=>{
-
+  const onFinish =async()=>{
+    setSaveLoading(true);
+    const interview_id = uuidv4();
+        const { data, error } = await supabase
+  .from('Interviews')
+  .insert([
+    { 
+      ...formData,
+      questionList:questionList,
+      userEmail:user?.email,
+      interview_id:interview_id
+     },
+  ])
+  .select()
+  setSaveLoading(false);
+  
   }
   return (
     <div>
@@ -57,19 +77,13 @@ function QuestionList({ formData }) {
 
       {questionList?.length > 0 &&
       <div>
-        <h2 className='font-bold text-lg mb-5'>Generated Interview Questions</h2>
-        <div className='p-5 border border-gray-300 rounded-xl  mt-4 space-y-3'>
-          {questionList.map((item, index) => (
-            <div key={index} className='p-3 border border-gray-200 rounded-xl  mb-3'>
-              <h2 className='font-bold '>Q{index + 1}: {item.question}</h2>
-              <h2 className='text-sm text-primary'>Type: {item?.type || 'N/A'}</h2>
-            </div>
-          ))}
-        </div>
+        <QuestionListContainer questionList={questionList}/>
         </div>
       }
       <div className='flex justify-end mt-10'>
-        <Button onClick ={()=>onFinish()}>Finish</Button>
+        <Button onClick ={()=>onFinish()} disabled = {saveLoading}>
+          {saveLoading && <Loader2 className='animate-spin'/>}
+          Finish</Button>
       </div>
     </div>
   )
