@@ -26,6 +26,7 @@ export default function RootLayout({ children }) {
       >
         {/* ✅ WRAP CHILDREN WITH <Provider> */}
         <Provider>
+          
           {children}
           <Toaster/>
 

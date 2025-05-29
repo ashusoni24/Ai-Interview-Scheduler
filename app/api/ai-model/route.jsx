@@ -20,7 +20,7 @@ export async function POST(req){
       apiKey: process.env.OPENROUTER_API_KEY,
     }) 
 const completion = await openai.chat.completions.create({
-    model: "openai/gpt-4o-mini",
+    model: "  openai/gpt-4o-mini",
     messages: [
       { role: "user", content: FINAL_PROMPT }
     ],

@@ -1,13 +1,14 @@
 'use client';
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import InterviewHeader from '../_components/InterviewHeader'
 import Image from 'next/image'
-import { Clock, Info, Video } from 'lucide-react'
+import { Clock, Info, Loader, Loader2Icon, Video } from 'lucide-react'
 import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
-import { useParams } from 'next/navigation'
+import { useParams, useRouter } from 'next/navigation'
 import { supabase } from '@/services/supabseClient';
 import { toast } from 'sonner';
+import { InterviewDataContext } from '@/context/InterviewDataContext';
 
 
 function Interview() {
@@ -17,7 +18,11 @@ function Interview() {
    
    const[interviewData,setInterviewData]=useState();
    const[username,setUserName]=useState();
+   const[userEmail,setUserEmail] = useState();
    const[loading,setLoading]= useState(false);
+   const{interviewInfo,setInterviewInfo} =useContext(InterviewDataContext);
+   const router = useRouter();
+
 
     useEffect(()=>{
     interview_id && GetInterviewDetails();
@@ -45,6 +50,24 @@ function Interview() {
 
        }
 
+       const onJoinInterview=async()=>{
+         setLoading(true);
+         let { data: Interviews, error } = await supabase
+         .from('Interviews')
+         .select('*')
+         .eq('interview_id',interview_id);
+         console.log(Interviews[0]);
+         setInterviewInfo({
+            userName:username,
+            userEmail:userEmail,
+            interviewData:Interviews[0]
+            
+         });
+         router.push('/interview/'+ interview_id +'/start')
+         setLoading(false);
+
+       }
+
   return (
 
     <div className='mt-16 flex justify-center px-4'>
@@ -67,6 +90,11 @@ function Interview() {
                 <Input placeholder='e.g. Ashutosh Soni' className='mt-2' onChange={(event)=>setUserName(event.target.value)}/>
              </div>
 
+             <div className='w-full mt-3'>
+                <h2>Enter Your Email Address</h2>
+                <Input placeholder='e.g. ashusoni@gmail.com' className='mt-2' onChange={(event)=>setUserEmail(event.target.value)}/>
+             </div>
+
               <div className='p-3 bg-blue-50 flex gap-4 rounded-lg mt-4'>
                 <Info className='text-primary'/>
                 <div>
@@ -82,9 +110,10 @@ function Interview() {
               </div>
 
               <Button className={'mt-5 w-full font-bold'}
-              disabled ={loading||!username}><Video/>Join Interview</Button>
+              disabled ={loading||!username}
+              onClick={()=>onJoinInterview()}><Video/> {loading && <Loader2Icon/>} Join Interview</Button>
 
-         </div>
+         </div>      
     </div>
   )
 }

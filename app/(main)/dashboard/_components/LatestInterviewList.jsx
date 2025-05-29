@@ -1,10 +1,35 @@
 'use client';
-import { Button } from '@/components/ui/button';
+import InterviewCard from './interviewcard';import { Button } from '@/components/ui/button';
+import { useUser } from '@/app/Provider';
+import { supabase } from '@/services/supabseClient';
 import { Camera, Video } from 'lucide-react';
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
+import { toast } from 'sonner';
 
 function LatestInterviewList() {
     const [interviewList,setInterviewList] = useState([]);
+    const {user} = useUser();
+
+    useEffect(()=>{
+      user && GetInterviewList();
+    },[user])
+
+    const GetInterviewList = async()=>
+    {
+  let { data: Interviews, error } = await supabase
+  .from('Interviews')
+  .select('*')
+  .eq('userEmail',user?.email)
+  .order('id',{ascending:false})
+  .limit(6)
+
+  console.log(Interviews);
+  setInterviewList(Interviews);
+
+    }
+
+    
+
   return (
     <div className='my-5'>
         <h2 className='font-bold text-2xl'> Priviously Created Interviews</h2>
@@ -14,6 +39,12 @@ function LatestInterviewList() {
             <h2>You dont have any interview created!</h2>
             <Button>+ Create New Interview</Button>  
         </div>}
+        {interviewList&&
+        <div className='grid grid-col-2 mt-5 xl:grid-cols-3 gap-5'>
+          {interviewList.map((interview,index)=>(
+              <InterviewCard interview={interview} key= {index}/>
+          ))}
+          </div>}
     </div>
   )
 }
