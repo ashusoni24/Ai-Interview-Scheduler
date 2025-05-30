@@ -11,7 +11,7 @@ import { v4 as uuidv4 } from 'uuid';
 function QuestionList({ formData,onCreateLink}) {
 
   const [loading, setLoading] = useState(true);
-  const [questionList, setQuestionlist] = useState();
+  const [questionList, setQuestionlist] = useState([]);
   const {user} = useUser();
   const [saveLoading ,setSaveLoading] = useState(false);
 
@@ -24,24 +24,46 @@ function QuestionList({ formData,onCreateLink}) {
   const GenerateQuestionList = async () => {
     setLoading(true);
     try {
-      const result = await axios.post('/api/ai-model', {
-        ...formData
-      });
+      const result = await axios.post('/api/ai-model', { ...formData });
+      console.log('API result:', result);
 
-      console.log(result.data.content);
+      // Defensive: handle missing content
       const Content = result.data.content;
+      if (!Content) {
+        console.log('No content in API response:', result.data);
+        toast('No questions generated. Please try again.');
+        setLoading(false);
+        return;
+      }
 
-      // Use regex to cleanly extract JSON from ```json blocks
       const match = Content.match(/```json\s*([\s\S]*?)\s*```/);
       const FINAL_CONTENT = match ? match[1] : Content;
+      console.log('FINAL_CONTENT:', FINAL_CONTENT);
 
-      const parsed = JSON.parse(FINAL_CONTENT);
-      const questions = parsed.interviewQuestions || parsed;
+      let parsed;
+      try {
+        parsed = JSON.parse(FINAL_CONTENT);
+      } catch (e) {
+        console.log('JSON parse error:', e, FINAL_CONTENT);
+        toast('Failed to parse questions. Try again.');
+        setLoading(false);
+        return;
+      }
+      console.log('parsed:', parsed);
 
+      let questions = [];
+      if (Array.isArray(parsed.interviewQuestions)) {
+        questions = parsed.interviewQuestions;
+      } else if (Array.isArray(parsed)) {
+        questions = parsed;
+      } else if (parsed && typeof parsed === 'object' && parsed.question) {
+        questions = [parsed];
+      }
+      console.log('questions:', questions);
       setQuestionlist(questions);
       setLoading(false);
     } catch (e) {
-      console.log(e);
+      console.log('Error in GenerateQuestionList:', e);
       toast('Server Error, Try Again!');
       setLoading(false);
     }
