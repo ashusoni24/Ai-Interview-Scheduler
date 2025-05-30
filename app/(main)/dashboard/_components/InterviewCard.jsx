@@ -1,10 +1,11 @@
 import { Button } from '@/components/ui/button'
-import { Copy, Send } from 'lucide-react'
+import { ArrowRight, Copy, Send } from 'lucide-react'
 import moment from 'moment'
+import Link from 'next/link'
 import React from 'react'
 import { toast } from 'sonner'
 
-function InterviewCard({interview}) {
+function InterviewCard({interview,viewDetail=false}) {
 const url = process.env.NEXT_PUBLIC_HOST_URL+"/"+ interview?.interview_id
    const copyLink=()=>{
              
@@ -24,15 +25,26 @@ const url = process.env.NEXT_PUBLIC_HOST_URL+"/"+ interview?.interview_id
             
         </div>
        
-        <h2 className='mt-1'>{interview.duration}</h2>
-        <div className="flex gap-3 w-full mt-5">
-          <Button variant="outline" className="flex-1" onClick={copyLink}>
-            <Copy /> Copy Link
-          </Button>
-          <Button className="flex-1" onClick={onSend}>
-            <Send /> Send
-          </Button>
-        </div>
+        <h2 className='mt-1 flex justify-between text-gray-500'>{interview.duration}
+          <span className='text-green-700'>{interview['interview-feedback']?.length} Candidate</span>
+        </h2>
+       {!viewDetail ? (
+  <div className="flex gap-3 w-full mt-5">
+    <Button variant="outline" className="flex-1" onClick={copyLink}>
+      <Copy /> Copy Link
+    </Button>
+    <Button className="flex-1" onClick={onSend}>
+      <Send /> Send
+    </Button>
+  </div>
+) : (
+  <Link href={'/scheduled-interview/'+interview?.interview_id +"/details"}>
+  <Button className="mt-5 w-full"  >
+    View Detail <ArrowRight />
+  </Button>
+  </Link>
+)}
+
     </div>
   )
 }
