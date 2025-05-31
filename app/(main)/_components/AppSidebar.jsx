@@ -15,17 +15,23 @@ import { Plus } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
+import { useUser } from "@/app/Provider"; // or your auth hook
 
 export function AppSidebar() {
-
-    const path = usePathname();
+  const path = usePathname();
+  const { user } = useUser(); // or however you get the user
 
   return (
     <Sidebar>
       <SidebarHeader className='flex items-center mt-2'>
-        <Image src = {'/logo.png'} alt ="logo" width ={200}
-        height={100} className="w-[120px]"></Image>
-        <Button className='w-full mt-2'><Plus/> Create New Interview</Button>
+        <Link href={user ? "/dashboard" : "/"}>
+          <Image src={'/logo.png'} alt="logo" width={200} height={100} className="w-[120px] cursor-pointer" />
+        </Link>
+        <Button asChild className='w-full mt-2'>
+          <Link href="/dashboard/create-interview">
+            <Plus /> Create New Interview
+          </Link>
+        </Button>
       </SidebarHeader>
       <SidebarContent>
         <SidebarGroup>
@@ -48,5 +54,5 @@ export function AppSidebar() {
       </SidebarContent>
       <SidebarFooter />
     </Sidebar>
-  )
+  );
 }
