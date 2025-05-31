@@ -8,6 +8,7 @@ import QuestionList from './_components/QuestionList'
 import { Toaster } from '@/components/ui/sonner'
 import { toast } from 'sonner'
 import InterviewLink from './_components/InterviewLink';
+import { useUser } from '@/app/Provider';
 
 
 function CreateInterview() {
@@ -15,6 +16,7 @@ function CreateInterview() {
     const [step,setStep] = useState(1);
     const [ formData , setFormData] = useState();
     const[interviewId,setInterviewid] = useState();
+    const {user} = useUser();
     const onHandleInputChange = (field , value) =>{
            setFormData(prev => ({
             ...prev,
@@ -24,6 +26,14 @@ function CreateInterview() {
     }
 
     const onGoToNext=()=>{
+      if (user === undefined) {
+    toast('Loading user info...');
+    return;
+  }
+  if (Number(user?.credits) <= 0) {
+    toast('Please Add Credits');
+    return;
+  }
       if(!formData?.jobPosition||!formData?.jobDescription||!formData?.duration||!formData?.type){
         toast("Please Enter All Details! ")
         return ;
