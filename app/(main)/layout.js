@@ -1,17 +1,15 @@
-import { Divide } from 'lucide-react'
-import React from 'react'
-import DashboardProvider from './provider'
+import { Divide } from "lucide-react";
+import React from "react";
+import DashboardProvider from "./provider";
 
-function DashboardLayout({children}) {
+function DashboardLayout({ children }) {
   return (
     <div>
-   <DashboardProvider>
-          <div className='p-10'>
-            {children}
-            </div>
-        </DashboardProvider>
-        </div>
-  )
+      <DashboardProvider>
+        <div className="p-10">{children}</div>
+      </DashboardProvider>
+    </div>
+  );
 }
 
-export default DashboardLayout
+export default DashboardLayout;
