@@ -358,7 +358,7 @@ export default function Home() {
       <section id="howitworks" className="w-full bg-[#f8f9fb] py-16">
         <div className="max-w-5xl mx-auto flex flex-col items-center">
           <h2 className="text-3xl font-bold text-gray-900 mb-4 text-center">
-            How AiCruitier Works
+            How AiCruitier Works!
           </h2>
           <p className="text-gray-500 mb-10 text-center max-w-2xl">
             Three simple steps to transform your recruitment process
