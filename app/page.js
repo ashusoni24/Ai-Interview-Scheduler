@@ -4,11 +4,11 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import BillingPlans from "@/app/(main)/billing/_components/BillingPlans";
-import { Clock, BarChart2, UserCheck } from "lucide-react";
+import { Clock, BarChart2, UserCheck, ArrowRight } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
 const rotatingPhrases = [
-  "Interview Assistant",
+  "RecruitBot",
   "Hiring Copilot",
   "Screening Bot",
   "Talent Scout",
@@ -19,6 +19,7 @@ export default function Home() {
   const [index, setIndex] = useState(0);
   const router = useRouter();
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -32,10 +33,30 @@ export default function Home() {
     return () => clearInterval(interval);
   }, []);
 
+  useEffect(() => {
+    const onScroll = () => {
+      setScrolled(window.scrollY > 10);
+    };
+    window.addEventListener("scroll", onScroll);
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  // Smooth scroll handler
+  const handleSmoothScroll = (id) => {
+    const el = document.getElementById(id);
+    if (el) {
+      el.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  };
+
   return (
     <main className="min-h-screen bg-[#f8f9fb] flex flex-col">
       {/* Header */}
-      <header className="w-full flex items-center justify-between px-8 py-6">
+      <header
+        className={`sticky top-0 z-30 w-full flex items-center justify-between px-8 py-6
+    bg-transparent transition-shadow ${scrolled ? "backdrop-blur-lg" : ""}`}
+        style={{ boxShadow: "0 2px 8px 0 rgba(0,0,0,0.04)" }}
+      >
         <div className="flex items-center gap-2">
           <Image
             src="/logo.png"
@@ -47,15 +68,24 @@ export default function Home() {
           />
         </div>
         <nav className="hidden md:flex items-center gap-8 text-base font-medium text-gray-700">
-          <a href="#features" className="hover:text-blue-600 transition">
+          <button
+            onClick={() => handleSmoothScroll("features")}
+            className="hover:text-blue-600 transition bg-transparent border-none outline-none cursor-pointer"
+          >
             Features
-          </a>
-          <a href="#howitworks" className="hover:text-blue-600 transition">
+          </button>
+          <button
+            onClick={() => handleSmoothScroll("howitworks")}
+            className="hover:text-blue-600 transition bg-transparent border-none outline-none cursor-pointer"
+          >
             How It Works
-          </a>
-          <a href="#pricing" className="hover:text-blue-600 transition">
+          </button>
+          <button
+            onClick={() => handleSmoothScroll("pricing")}
+            className="hover:text-blue-600 transition bg-transparent border-none outline-none cursor-pointer"
+          >
             Pricing
-          </a>
+          </button>
         </nav>
         {!isAuthenticated ? (
           <Button
@@ -82,12 +112,23 @@ export default function Home() {
 
       {/* Hero Section */}
       <section
-        className="relative flex flex-col items-center justify-center text-center min-h-[90vh] w-full bg-gradient-to-b from-[#f8f9fb] via-white to-[#f8f9fb] overflow-hidden"
+        className="relative flex flex-col-reverse md:flex-row items-center justify-between min-h-[90vh] w-full px-4 md:px-16 py-16 md:gap-20 bg-transparent overflow-hidden"
         style={{ zIndex: 1 }}
       >
-        <div className="z-10 flex flex-col items-center justify-center">
-          {/* Animated Voice Waveform */}
-          <div className="mb-8">
+        {/* Modern blurred gradient background */}
+        <div
+          className="absolute -top-32 -left-32 w-[1000px] h-[900px] rounded-full bg-gradient-to-br from-blue-200 via-blue-300 to-purple-200 opacity-20 blur-3xl pointer-events-none"
+          aria-hidden="true"
+          style={{ zIndex: 0 }}
+        />
+        {/* Left: Text Content */}
+        <motion.div
+          initial={{ opacity: 0, x: -40 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.7, ease: "easeOut" }}
+          className="relative w-full md:w-1/2 flex flex-col items-start justify-center text-left space-y-6 z-10"
+        >
+          <div className="mb-4">
             <svg
               width="180"
               height="40"
@@ -287,11 +328,10 @@ export default function Home() {
               </g>
             </svg>
           </div>
-          {/* End Voice Waveform */}
 
-          <h1 className="text-4xl md:text-5xl font-bold mb-4 text-gray-900 flex flex-wrap justify-center">
+          <h1 className="text-4xl md:text-6xl font-extrabold mb-4 text-gray-900 leading-tight">
             AI-Powered{" "}
-            <span className="text-blue-600 mx-2 relative min-w-[210px] h-[56px] inline-flex items-center justify-center">
+            <span className="text-blue-600 relative">
               <AnimatePresence mode="wait">
                 <motion.span
                   key={rotatingPhrases[index]}
@@ -305,19 +345,50 @@ export default function Home() {
                 </motion.span>
               </AnimatePresence>
             </span>
+            <br className="hidden md:block" />
             for Modern Recruiters
           </h1>
-          <p className="text-lg text-gray-600 mb-8 max-w-2xl">
+          <p className="text-lg text-gray-600 max-w-xl">
             Let our AI voice agent conduct candidate interviews while you focus on finding the perfect match. Save time, reduce bias, and improve your hiring process.
           </p>
-          <Button className="bg-blue-400 text-white px-8 py-3 text-base font-semibold rounded-lg shadow hover:bg-blue-700 transition">
+          <Button className="bg-gradient-to-r from-blue-500 via-blue-300 to-purple-300 text-white px-16 py-4 font-semibold text-lg rounded-lg shadow-lg hover:from-blue-600 hover:to-purple-500 hover:scale-105 hover:shadow-xl active:scale-95 transition-all duration-150 flex items-center gap-2">
             Create Interview
+            <ArrowRight size={20} className="ml-1 transition-transform duration-200 group-hover:translate-x-1" />
           </Button>
-        </div>
+        </motion.div>
+
+        {/* Right: Hero Image */}
+        <motion.div
+          initial={{ opacity: 0, x: 40 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.7, ease: "easeOut", delay: 0.2 }}
+          className="relative w-full md:w-1/2 flex items-center justify-center mb-8 md:mb-0 z-10"
+        >
+          <motion.div
+            animate={{ y: [0, -10, 0] }}
+            transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+          >
+            <Image
+              src="/landingpage1.png"
+              alt="AI Interview Agent"
+              width={1500}
+              height={400}
+              className="w-full max-w-3xl h-auto object-contain rounded-3xl shadow-2xl transition-transform duration-300 hover:scale-105"
+              priority
+            />
+          </motion.div>
+        </motion.div>
       </section>
 
       {/* Features Section */}
-      <section id="features" className="w-full bg-white py-16">
+      <motion.section
+        id="features"
+        className="w-full bg-white py-16 scroll-mt-24"
+        initial={{ opacity: 0, y: 40 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.7, ease: "easeOut" }}
+      >
         <div className="max-w-5xl mx-auto flex flex-col items-center">
           <h2 className="text-3xl font-bold text-gray-900 mb-4 text-center">
             Streamline Your Hiring Process
@@ -326,7 +397,7 @@ export default function Home() {
             AiCruitier helps you save time and find better candidates with our advanced AI interview technology.
           </p>
           <div className="flex flex-col md:flex-row gap-8 w-full justify-center">
-            <div className="bg-[#f8f9fb] border rounded-xl flex flex-col items-center p-8 flex-1 shadow-sm">
+            <div className="bg-[#f8f9fb] border rounded-xl flex flex-col items-center p-8 flex-1 shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-150">
               <Clock className="text-blue-600 mb-3" size={36} />
               <h3 className="font-semibold text-lg mb-2">Save Time</h3>
               <p className="text-gray-500 text-center text-base">
@@ -334,7 +405,7 @@ export default function Home() {
                 candidates.
               </p>
             </div>
-            <div className="bg-[#f8f9fb] border rounded-xl flex flex-col items-center p-8 flex-1 shadow-sm">
+            <div className="bg-[#f8f9fb] border rounded-xl flex flex-col items-center p-8 flex-1 shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-150">
               <BarChart2 className="text-blue-600 mb-3" size={36} />
               <h3 className="font-semibold text-lg mb-2">Data-Driven Insights</h3>
               <p className="text-gray-500 text-center text-base">
@@ -342,7 +413,7 @@ export default function Home() {
                 interview responses.
               </p>
             </div>
-            <div className="bg-[#f8f9fb] border rounded-xl flex flex-col items-center p-8 flex-1 shadow-sm">
+            <div className="bg-[#f8f9fb] border rounded-xl flex flex-col items-center p-8 flex-1 shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-150">
               <UserCheck className="text-blue-600 mb-3" size={36} />
               <h3 className="font-semibold text-lg mb-2">Reduce Bias</h3>
               <p className="text-gray-500 text-center text-base">
@@ -352,10 +423,13 @@ export default function Home() {
             </div>
           </div>
         </div>
-      </section>
+      </motion.section>
 
       {/* How It Works Section */}
-      <section id="howitworks" className="w-full bg-[#f8f9fb] py-16">
+      <section
+        id="howitworks"
+        className="w-full bg-[#f3f6fa] py-16 scroll-mt-24"
+      >
         <div className="max-w-5xl mx-auto flex flex-col items-center">
           <h2 className="text-3xl font-bold text-gray-900 mb-4 text-center">
             How AiCruitier Works!
