@@ -57,7 +57,27 @@ export default function Home() {
             Pricing
           </a>
         </nav>
-        
+        {!isAuthenticated ? (
+          <Button
+            className="text-white hover:text-blue-600 transition font-medium cursor-pointer"
+            onClick={() => router.push("/auth")}
+          >
+            Dashboard
+          </Button>
+        ) : (
+          <Button
+            className="text-gray-700 hover:text-blue-600 transition font-medium cursor-pointer"
+            onClick={() => {
+              if (isAuthenticated) {
+                router.push("/dashboard");
+              } else {
+                router.push("/auth");
+              }
+            }}
+          >
+            Login
+          </Button>
+        )}
       </header>
 
       {/* Hero Section */}
@@ -73,7 +93,18 @@ export default function Home() {
           <h1 className="text-4xl md:text-5xl font-bold mb-4 text-gray-900 flex flex-wrap justify-center">
             AI-Powered{" "}
             <span className="text-blue-600 mx-2 relative min-w-[210px] h-[56px] inline-flex items-center justify-center">
-              Interview
+              <AnimatePresence mode="wait">
+                <motion.span
+                  key={rotatingPhrases[index]}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -20 }}
+                  transition={{ duration: 0.5 }}
+                  className="inline-block"
+                >
+                  {rotatingPhrases[index]}
+                </motion.span>
+              </AnimatePresence>
             </span>
             for Modern Recruiters
           </h1>
