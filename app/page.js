@@ -364,19 +364,14 @@ export default function Home() {
           transition={{ duration: 0.7, ease: "easeOut", delay: 0.2 }}
           className="relative w-full md:w-1/2 flex items-center justify-center mb-8 md:mb-0 z-10"
         >
-          <motion.div
-            animate={{ y: [0, -10, 0] }}
-            transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-          >
-            <Image
-              src="/landingpage1.png"
-              alt="AI Interview Agent"
-              width={1500}
-              height={400}
-              className="w-full max-w-3xl h-auto object-contain rounded-3xl shadow-2xl transition-transform duration-300 hover:scale-105"
-              priority
-            />
-          </motion.div>
+          <Image
+            src="/landingpage1.png"
+            alt="AI Interview Agent"
+            width={500}
+            height={400}
+            className="w-full max-w-3xl h-auto object-contain rounded-3xl shadow-2xl transition-transform duration-300 hover:scale-105"
+            priority
+          />
         </motion.div>
       </section>
 
