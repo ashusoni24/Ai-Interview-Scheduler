@@ -16,6 +16,15 @@ import Image from "next/image"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { useUser } from "@/app/Provider"; // or your auth hook
+import { Home, Users, ClipboardList, CreditCard, Settings } from "lucide-react";
+
+const navItems = [
+  { href: "/dashboard", label: "Dashboard", icon: <Home size={20} /> },
+  { href: "/scheduled-interview", label: "Scheduled Interview", icon: <ClipboardList size={20} /> },
+  { href: "/all-Interview", label: "All Interview", icon: <Users size={20} /> },
+  { href: "/billing", label: "Billing", icon: <CreditCard size={20} /> },
+  { href: "/settings", label: "Settings", icon: <Settings size={20} /> },
+];
 
 export function AppSidebar() {
   const path = usePathname();
@@ -37,15 +46,15 @@ export function AppSidebar() {
         <SidebarGroup>
             <SidebarContent>
                 <SidebarMenu>
-                    {SidebarOptions.map((options,index)=>(
-                        <SidebarMenuItem key={index} className='p-1'>
-                            <SidebarMenuButton asChild className={`p-4 ${path == options.path&&'bg-blue-50'}`}> 
-                               <Link href={options.path}>
-                                <options.icon className={`text-[16px] ${path == options.path && 'text-primary'}`} />
-                                <span className={`text-[16px] ${path == options.path && 'text-primary'}`}>{options.name}</span>
-                                </Link>
-                            </SidebarMenuButton>
-                        </SidebarMenuItem>
+                    {navItems.map((item) => (
+                      <SidebarMenuItem key={item.href} className='p-1'>
+                          <SidebarMenuButton asChild className={`p-4 ${path == item.href&&'bg-blue-50'}`}> 
+                             <Link href={item.href}>
+                              {item.icon}
+                              <span className={`text-[16px] ${path == item.href && 'text-primary'}`}>{item.label}</span>
+                              </Link>
+                          </SidebarMenuButton>
+                      </SidebarMenuItem>
                     ))}
                 </SidebarMenu>
             </SidebarContent>
