@@ -1,40 +1,59 @@
 import React from 'react'
-import InterviewDetail from '../page'
 import { Calendar, Clock, MessageCircleQuestionIcon } from 'lucide-react'
 import moment from 'moment';
 
-function InterviewDetailContainer({interviewDetail}) {
+function InterviewDetailContainer({ interviewDetail }) {
   return (
-    <div className='p-5 bg-blue-50 rounded-lg mt-5 '>
-        <h2>{interviewDetail?.jobPosition}</h2>
-        <div className='mt-4 flex items-center justify-between lg:pr-30 '>
+    <div className='mt-7'>
+      <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6 mb-1">
+        <div className="flex items-center gap-3">
+          <span className="bg-blue-100 text-blue-600 rounded-full p-2">
+            <Clock className="h-5 w-5" />
+          </span>
+          <div>
+            <div className="text-xs text-gray-500">Duration</div>
+            <div className="font-semibold">{interviewDetail?.duration}</div>
+          </div>
+        </div>
+        <div className="flex items-center gap-3">
+          <span className="bg-green-100 text-green-600 rounded-full p-2">
+            <Calendar className="h-5 w-5" />
+          </span>
+          <div>
+            <div className="text-xs text-gray-500">Created On</div>
+            <div className="font-semibold">{moment(interviewDetail?.created_at).format('MMM DD, yyyy')}</div>
+          </div>
+        </div>
+        {interviewDetail?.type && (
+          <div className="flex items-center gap-3">
+            <span className="bg-purple-100 text-purple-600 rounded-full p-2">
+              <MessageCircleQuestionIcon className="h-5 w-5" />
+            </span>
             <div>
-                <h2 className='text-sm text-gray-500'>Duration</h2>
-                <h2 className='flex text-sm font-bold items-center gap-2 mt-1 '><Clock className='h-4 w-4'/>{interviewDetail?.duration}</h2>
+              <div className="text-xs text-gray-500">Type</div>
+              <div className="font-semibold">{JSON.parse(interviewDetail?.type)}</div>
             </div>
-            <div>
-                <h2 className='text-sm text-gray-500'>Created On</h2>
-                <h2 className='flex text-sm font-bold items-center gap-2 mt-1 '><Calendar className='h-4 w-4'/>{moment(interviewDetail?.created_at).format('MMM DD,yyyy')}</h2>
+          </div>
+        )}
+      </div>
+      <hr className="my-4" />
+      <div className="mb-2">
+        <h3 className="font-bold text-lg mb-1">Job Position: </h3>
+        <div className="text-gray-800 text-base mb-2">{interviewDetail?.jobPosition}</div>
+        <h3 className="font-bold text-lg mb-1">Job Description:</h3>
+        <p className="text-gray-700 text-sm leading-6 ">{interviewDetail?.jobDescription}</p>
+      </div>
+      <div>
+        <h3 className="font-bold text-lg mb-2">Interview Questions:</h3>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          {interviewDetail?.questionList?.map((item, index) => (
+            <div key={index} className="bg-blue-50 rounded-lg p-3 text-sm flex items-start gap-2">
+              <span className="font-bold text-blue-600">{index + 1}.</span>
+              <span>{item?.question}</span>
             </div>
-           {interviewDetail?.type && <div>
-                <h2 className='text-sm text-gray-500'>Type</h2>
-                <h2 className='flex text-sm font-bold items-center gap-2 mt-1'><Clock className='h-4 w-4'/>{JSON.parse(interviewDetail?.type)}</h2>
-            </div>}
+          ))}
         </div>
-        <div className='mt-5'>
-            <h2 className='font-bold'>Job Description </h2>
-             <p className='text-sm leading-6'>{interviewDetail?.jobDescription}</p>
-        </div>
-        <div className='mt-5'>
-             <h2 className='font-bold'>Interview Questions </h2>
-             <div className='grid grid-cols-2 gap-3 mt-2'>
-                {interviewDetail?.questionList?.map((item,index)=>(
-                    <h2 key={index} className='text-xs flex'>{index+1}.{item?.question}</h2>
-                ))}
-             </div>
-
-             
-        </div>
+      </div>
     </div>
   )
 }
