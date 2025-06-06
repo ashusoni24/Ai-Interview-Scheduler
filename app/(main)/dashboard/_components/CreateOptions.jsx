@@ -1,25 +1,41 @@
-import { Phone, Video } from 'lucide-react'
-import Link from 'next/link'
-import React from 'react'
+import {  CreditCard, Phone } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
-function CreateOptions() {
+
+export default function CreateOptions() {
   return (
-    <div className='grid grid-cols-2 gap-5'>
-        <Link href={'/dashboard/create-interview'} className=' border border-gray-200 bg-blue-50 rounded-lg p-5 flex flex-col gap-2 cursor-pointer'
-        >
-          <Video className='p-3 text-primary bg-gray-50  rounded-lg h-12
-          w-12 border'></Video>
-          <h2 className='font-bold'>Create New Interview</h2>
-          <p className='text-gray-500'>Create AI Interview and Schedule them with Candidates</p>
-        </Link>
-        <div className=' border border-gray-200 bg-blue-50 rounded-lg p-5 flex flex-col gap-2'>
-          <Phone className='p-3 text-primary bg-gray-50  rounded-lg h-12
-          w-12 border'></Phone>
-          <h2 className='font-bold'>Create Phone Screeing Call</h2>
-          <p className='text-gray-500'>Scheule Phone Screening Call with Candidates</p>
+    <div className="flex flex-col md:flex-row gap-6 mb-8">
+      <div className="flex-1 bg-white/70 backdrop-blur-md rounded-2xl shadow-lg p-6 flex flex-col items-start hover:shadow-2xl transition group border border-blue-100">
+        <div className="bg-blue-100 text-blue-600 rounded-full p-3 mb-4">
+          <CreditCard size={28} />
         </div>
+        <h3 className="font-bold text-lg mb-1">Create New Interview</h3>
+        <p className="text-gray-500 mb-4">
+          Create AI Interview and schedule them with candidates.
+        </p>
+        <Button
+          asChild
+          className="bg-gradient-to-r bg-blue-400 text-white font-semibold px-6 py-2 rounded-lg shadow group-hover:scale-105 transition"
+        >
+          <Link href="/dashboard/create-interview">Create Interview</Link>
+        </Button>
+      </div>
+      <div className="flex-1 bg-white/70 backdrop-blur-md rounded-2xl shadow-lg p-6 flex flex-col items-start hover:shadow-2xl transition group border border-blue-100">
+        <div className="bg-blue-100 text-blue-600 rounded-full p-3 mb-4">
+          <Phone size={28} />
+        </div>
+        <h3 className="font-bold text-lg mb-1">Create Phone Screening Call</h3>
+        <p className="text-gray-500 mb-4">
+          Schedule phone screening calls with candidates.
+        </p>
+        <Button
+          asChild
+          className="bg-gradient-to-r bg-blue-400 text-white font-semibold px-6 py-2 rounded-lg shadow group-hover:scale-105 transition"
+        >
+          <Link href="/dashboard/create-phone-screening">Create Call</Link>
+        </Button>
+      </div>
     </div>
-  )
+  );
 }
-
-export default CreateOptions
