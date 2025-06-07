@@ -27,30 +27,68 @@ const onCopyLink = async()=>{
         <h2 className='font-bold text-lg mt-4'>Your AI Interview is Ready</h2>
         <p className='mt-3'>Share this link with your Candidated to start the interview process</p>
 
-        <div className='w-full p-7 mt-6 rounded-lg bg-blue-50 '>
-            <div className='flex justify-between items-center'>
-                <h2 className='font-bold'>Interview Link</h2>
-                <h2 className='p-1 px-2 text-primary  rounded-4xl'>Valid for 30 Days</h2>
-            </div>
-                    <div className='mt-3 flex gap-3 items-center  rounded-2xl'>
-                  <Input defaultValue = {GetInterviewUrl()} disabled = {true} className='bg-white border-2'
-                  ></Input>
-                  <Button onClick={()=>onCopyLink()} className='border-gray-500 border-0'> <Copy/> Copy Link</Button>
-                </div>
-                <hr className='my-5'/>
-                <div className='flex gap-5'>
-                  <h2 className='text-sm  flex gap-2 items-center '><Clock className='h-4 w-4'/> {formData?.duration} </h2>
-                  <h2 className='text-sm  flex gap-2 items-center'><List className='h-4 w-4'/> 10 Questions </h2>
-                </div>
+        {/* Interview Link Section */}
+        <div className="w-full p-6 mt-6 rounded-2xl bg-white shadow border border-blue-100">
+          <div className="flex justify-between items-center mb-3">
+            <h2 className="font-bold text-base">Interview Link</h2>
+            <span className="bg-blue-100 text-blue-700 text-xs font-semibold px-3 py-1 rounded-full shadow-sm">
+              Valid for 30 Days
+            </span>
+          </div>
+          <div className="flex gap-2 items-center mb-4">
+            <Input
+              value={GetInterviewUrl()}
+              disabled
+              className="bg-blue-50 border-2 text-sm"
+            />
+            <Button
+              onClick={onCopyLink}
+              className="bg-gradient-to-r from-blue-400 to-blue-600 text-white shadow hover:scale-105 transition"
+            >
+              <Copy className="w-4 h-4 mr-1" /> Copy Link
+            </Button>
+          </div>
+          <div className="flex gap-5">
+            <span className="text-sm flex gap-2 items-center text-gray-600">
+              <Clock className="h-4 w-4" /> {formData?.duration}
+            </span>
+            <span className="text-sm flex gap-2 items-center text-gray-600">
+              <List className="h-4 w-4" /> 10 Questions
+            </span>
+          </div>
         </div>
 
-        <div className='mt-7 bg-blue-50 p-5 rounded-lg w-full'>
-          
-          <h2 className='font-bold'>Share Via</h2>
-          <div className='flex gap-7 mt-2'>
-            <Button variant = {'outline '} className='border-2' ><Mail/> Email</Button>
-            <Button variant = {'outline '}className='border-2' ><Mail/> Slack</Button>
-            <Button variant = {'outline '} className='border-2 '><Mail/> Whatsapp</Button>
+        {/* Share Via Section */}
+        <div className="mt-7 bg-blue-50/70 p-6 rounded-2xl w-full shadow border border-blue-100">
+          <h2 className="font-bold mb-3">Share Via</h2>
+          <div className="flex gap-4 flex-wrap">
+            {/* Email */}
+            <a
+              href={`mailto:24ashusoni@gmail.com?subject=AI Interview Link&body=Hi,%0A%0APlease use this link to start your interview:%0A${encodeURIComponent(GetInterviewUrl())}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="border-2 rounded-full px-5 py-2 flex items-center gap-2 hover:border-blue-500 transition cursor-pointer"
+            >
+              <Mail className="w-4 h-4" /> Email
+            </a>
+            {/* Slack */}
+            <a
+              href="https://slack.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="border-2 rounded-full px-5 py-2 flex items-center gap-2 hover:border-blue-500 transition cursor-pointer"
+            >
+              <Mail className="w-4 h-4" /> Slack
+            </a>
+            {/* WhatsApp */}
+            <a
+              href="https://web.whatsapp.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="border-2 rounded-full px-5 py-2 flex items-center gap-2 hover:border-blue-500 transition cursor-pointer"
+            >
+              <Mail className="w-4 h-4" /> Whatsapp
+            </a>
           </div>
         </div>
         <div className='flex w-full gap-5 justify-between mt-6'>

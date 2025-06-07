@@ -1,7 +1,6 @@
-import {  CreditCard, Phone } from "lucide-react";
+import { CreditCard, Phone } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-
 
 export default function CreateOptions() {
   return (
@@ -21,7 +20,11 @@ export default function CreateOptions() {
           <Link href="/dashboard/create-interview">Create Interview</Link>
         </Button>
       </div>
-      <div className="flex-1 bg-white/70 backdrop-blur-md rounded-2xl shadow-lg p-6 flex flex-col items-start hover:shadow-2xl transition group border border-blue-100">
+      <div className="relative flex-1 bg-white/70 backdrop-blur-md rounded-2xl shadow-lg p-6 flex flex-col items-start hover:shadow-2xl transition group border border-blue-100">
+        {/* Coming Soon Badge */}
+        <span className="absolute top-4 right-4 bg-yellow-400 text-white text-xs font-semibold px-3 py-1 rounded-full shadow-lg z-10 animate-pulse">
+          Coming Soon
+        </span>
         <div className="bg-blue-100 text-blue-600 rounded-full p-3 mb-4">
           <Phone size={28} />
         </div>
@@ -30,10 +33,10 @@ export default function CreateOptions() {
           Schedule phone screening calls with candidates.
         </p>
         <Button
-          asChild
-          className="bg-gradient-to-r bg-blue-400 text-white font-semibold px-6 py-2 rounded-lg shadow group-hover:scale-105 transition"
+          disabled
+          className="bg-gradient-to-r bg-blue-400 text-white font-semibold px-6 py-2 rounded-lg shadow opacity-60 cursor-not-allowed"
         >
-          <Link href="/dashboard/create-phone-screening">Create Call</Link>
+          Coming Soon
         </Button>
       </div>
     </div>
