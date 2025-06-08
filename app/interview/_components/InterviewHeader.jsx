@@ -3,10 +3,16 @@ import React from 'react'
 
 function InterviewHeader() {
   return (
-    <div className='p-4 shadow-sm'>
-        <Image src={'/logo.png'} alt='logo' width ={200} height={100}
-        className='w-[140px]'/> 
-    </div>
+    <header className="w-full flex justify-center items-center py-4 bg-blur backdrop-blur-md shadow-md border-b border-blue-100 sticky top-0 z-30">
+      <Image
+        src="/logo.png"
+        alt="logo"
+        width={120}
+        height={40}
+        className="w-[120px] h-auto"
+        priority
+      />
+    </header>
   )
 }
 
