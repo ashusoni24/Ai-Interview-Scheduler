@@ -32,8 +32,8 @@ function Login() {
         transition={{ duration: 0.7, ease: "easeOut" }}
         className="flex flex-col items-center border rounded-2xl p-8 bg-white/70 dark:bg-[#23232a]/80 backdrop-blur-xl shadow-2xl"
       >
-        <Image src="/logo.png" alt="logo" width={200} height={150} className="w-[170px]" />
-        <p className="text-blue-600 dark:text-blue-300 text-sm mt-2 mb-4 text-center font-medium">
+        <Image src="/logo8.png" alt="logo" width={180} height={150} className="w-[140px]" />
+        <p className="text-blue-600 dark:text-blue-300 text-sm  mb-4 text-center font-medium">
           AI-powered hiring made easy
         </p>
         <div className="flex flex-col items-center w-full">
