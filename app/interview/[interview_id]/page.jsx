@@ -69,51 +69,63 @@ function Interview() {
        }
 
   return (
-
-    <div className='mt-16 flex justify-center px-4'>
-         <div className='w-full max-w-2xl flex flex-col items-center justify-center border rounded-2xl bg-white p-9 mb-20'>
-            <Image src={'/logo.png'} alt='logo' width ={200} height={100}
-        className='w-[140px]'/>
-        <h2 className='mt-2'>
-           AI-Powered Interview Platform
+    <div className="min-h-screen flex justify-center items-center bg-gradient-to-br from-slate-100 via-blue-50 to-purple-50 py-8 px-2">
+      <div className="w-full max-w-2xl flex flex-col items-center justify-center border rounded-2xl bg-white/80 backdrop-blur-lg p-6 mb-10 shadow-2xl">
+        <h2 className='mt-2 text-2xl font-extrabold text-slate-800'>
+          AI-Powered Interview Platform
         </h2>
-             <Image src={'/interview2.png'} alt='interview'
-             width={500}
-             height={500}
-             className='w-[280px] my-4'/>
+        <Image src={'/interview2.png'} alt='interview'
+          width={500}
+          height={500}
+          className='w-[280px] my-4'
+        />
 
-             <h2 className='font-bold text-xl '>{interviewData?.jobPosition}</h2>
-             <h2 className='flex gap-2 items-center mt-2 text-gray-500'><Clock className='h-4 w-4'/>{interviewData?.duration}</h2>
+        <h2 className='font-bold text-xl text-black'>{interviewData?.jobPosition}</h2>
+        <h2 className='flex gap-2 items-center mt-2 text-gray-500 font-mono'>
+          <Clock className='h-4 w-4 text-blue-500'/>
+          {interviewData?.duration}
+        </h2>
 
-             <div className='w-full '>
-                <h2>Enter Your Full Name</h2>
-                <Input placeholder='e.g. Ashutosh Soni' className='mt-2' onChange={(event)=>setUserName(event.target.value)}/>
-             </div>
+        <div className='w-full mt-4'>
+          <h2 className="text-sm font-semibold text-gray-700 mb-1">Enter Your Full Name</h2>
+          <Input
+            placeholder='e.g. Ashutosh Soni'
+            className='mt-2 bg-white/90 border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-400 focus:border-blue-400 shadow-sm transition'
+            onChange={(event)=>setUserName(event.target.value)}
+          />
+        </div>
 
-             <div className='w-full mt-3'>
-                <h2>Enter Your Email Address</h2>
-                <Input placeholder='e.g. ashusoni@gmail.com' className='mt-2' onChange={(event)=>setUserEmail(event.target.value)}/>
-             </div>
+        <div className='w-full mt-3'>
+          <h2 className="text-sm font-semibold text-gray-700 mb-1">Enter Your Email Address</h2>
+          <Input
+            placeholder='e.g. ashusoni@gmail.com'
+            className='mt-2 bg-white/90 border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-400 focus:border-blue-400 shadow-sm transition'
+            onChange={(event)=>setUserEmail(event.target.value)}
+          />
+        </div>
 
-              <div className='p-3 bg-blue-50 flex gap-4 rounded-lg mt-4'>
-                <Info className='text-primary'/>
-                <div>
-                    <h2 className='font-bold'>Before you begin </h2>
-                   <ul className=''>
-                        <li className='text-sm text-primary'>- Test you microphone before</li>
-                        <li className='text-sm text-primary'>- Ensure you have a stable connection</li>
-                        <li className='text-sm text-primary'>- Find a quiet place for interview</li>
-                        
-                </ul>
-             </div>
+        <div className='p-3 bg-blue-50/80 border-l-4 border-blue-400 flex gap-4 rounded-lg mt-4 w-full'>
+          <Info className='text-blue-500 mt-1'/>
+          <div>
+            <h2 className='font-bold text-blue-700 mb-1'>Before you begin</h2>
+            <ul>
+              <li className='text-sm text-blue-700'>- Test your microphone before</li>
+              <li className='text-sm text-blue-700'>- Ensure you have a stable connection</li>
+              <li className='text-sm text-blue-700'>- Find a quiet place for interview</li>
+            </ul>
+          </div>
+        </div>
 
-              </div>
-
-              <Button className={'mt-5 w-full font-bold'}
-              disabled ={loading||!username}
-              onClick={()=>onJoinInterview()}><Video/> {loading && <Loader2Icon/>} Join Interview</Button>
-
-         </div>      
+        <Button
+          className='mt-5 w-full font-bold text-lg py-3 rounded-xl bg-gradient-to-r bg-blue-400 hover:scale-105 transition-all flex items-center justify-center gap-2'
+          disabled={loading||!username}
+          onClick={()=>onJoinInterview()}
+        >
+          <Video className="mr-2" />
+          {loading && <Loader2Icon className="animate-spin mr-2" />}
+          Join Interview
+        </Button>
+      </div>
     </div>
   )
 }
