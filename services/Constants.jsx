@@ -92,13 +92,13 @@ for hire or not with msg. Give me response in JSON format
 {
     feedback:{
         rating:{
-            techicalSkills:5,
-            communication:6,
-            problemSolving:4,
-            experince:7
+            techicalSkills:<number 1-10>,
+            communication:<number 1-10>,
+            problemSolving:<number 1-10>,
+            experince:<number 1-10>
         },
         summery:<in 3 Line>,
-        Recommendation:'',
+        Recommendation:<Yes/No>,
         RecommendationMsg:''
     }
 }
