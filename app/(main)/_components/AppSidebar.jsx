@@ -34,7 +34,7 @@ export function AppSidebar() {
     <Sidebar>
       <SidebarHeader className='flex items-center mt-2'>
         <Link href={user ? "/dashboard" : "/"}>
-          <Image src={'/logo.png'} alt="logo" width={200} height={100} className="w-[120px] cursor-pointer" />
+          <Image src={'/logo12.png'} alt="logo" width={200} height={100} className="w-[150px] cursor-pointer" />
         </Link>
         <Button asChild className='w-full mt-2'>
           <Link href="/dashboard/create-interview">
