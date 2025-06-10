@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import BillingPlans from "@/app/(main)/billing/_components/BillingPlans";
-import { Clock, BarChart2, UserCheck, ArrowRight } from "lucide-react";
+import { Clock, BarChart2, UserCheck, ArrowRight, Github, Linkedin, CircleUser } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { supabase } from "@/services/supabseClient"; // Make sure this import is correct
 
@@ -67,7 +67,7 @@ export default function Home() {
       <div className="absolute inset-0 w-full h-[100vh] z-0 pointer-events-none">
         {/* Gradient */}
         <div
-          className="absolute -top-32 -left-32 w-[1000px] h-[100vh] rounded-full bg-gradient-to-br from-blue-200 via-blue-300 to-purple-300 opacity-20 blur-3xl"
+          className="absolute -top-32 -left-32 w-[1000px] h-[100vh] rounded-full bg-gradient-to-br from-blue-300 via-blue-300 to-purple-300 opacity-20 blur-3xl"
           aria-hidden="true"
           style={{ zIndex: 0 }}
         />
@@ -123,11 +123,11 @@ export default function Home() {
         >
           <div className="flex items-center gap-2">
             <Image
-              src="/logo.png"
+              src="/logo12.png"
               alt="AiCruitier Logo"
               width={120}
               height={40}
-              className="h-10 w-auto"
+              className="h-9 w-auto"
               priority
             />
           </div>
@@ -217,7 +217,24 @@ export default function Home() {
           alt="Handshake"
           width={90}
           height={90}
-          className="absolute top-25 left-120 opacity-40 pointer-events-none select-none z-10 md:w-[100px] md:h-[100px] w-[60px] h-[60px]"
+          className="absolute top-20 left-120 opacity-40 pointer-events-none select-none z-10 md:w-[100px] md:h-[100px] w-[60px] h-[60px]"
+          style={{ filter: "grayscale(1)" }}
+        />
+
+        <Image
+          src="/10start.png"
+          alt="Handshake"
+          width={90}
+          height={90}
+          className="absolute top-25 left-20 opacity-50 pointer-events-none select-none z-10 md:w-[70px] md:h-[70px] w-[60px] h-[60px]"
+          style={{ filter: "grayscale(1)" }}
+        />
+        <Image
+          src="/11rocket.png"
+          alt="rocket"
+          width={90}
+          height={90}
+          className="absolute top-190 left-30 opacity-25 pointer-events-none select-none z-10 md:w-[60px] md:h-[60px] w-[60px] h-[60px]"
           style={{ filter: "grayscale(1)" }}
         />
          <Image
@@ -225,7 +242,7 @@ export default function Home() {
           alt="Handshake"
           width={90}
           height={90}
-          className="absolute top-80 left-50 opacity-30 pointer-events-none select-none z-10 md:w-[100px] md:h-[100px] w-[60px] h-[60px]"
+          className="absolute top-90 left-70 opacity-20 pointer-events-none select-none z-10 md:w-[100px] md:h-[90px] w-[60px] h-[60px]"
           style={{ filter: "grayscale(1)" }}
         />
         <Image
@@ -233,7 +250,15 @@ export default function Home() {
           alt="Paper Plane"
           width={80}
           height={80}
-          className="absolute top-18 right-80 opacity-50 pointer-events-none select-none z-10 md:w-[90px] md:h-[90px] w-[50px] h-[50px]"
+          className="absolute top-18 right-120 opacity-50 pointer-events-none select-none z-10 md:w-[90px] md:h-[90px] w-[50px] h-[50px]"
+          style={{ filter: "grayscale(1)" }}
+        />
+        <Image
+          src="/12laptop.png"
+          alt="Paper Plane"
+          width={80}
+          height={80}
+          className="absolute top-70 right-40 opacity-25 pointer-events-none select-none z-10 md:w-[70px] md:h-[70px] w-[50px] h-[50px]"
           style={{ filter: "grayscale(1)" }}
         />
         <Image
@@ -241,7 +266,7 @@ export default function Home() {
           alt="Chat Bubble"
           width={70}
           height={70}
-          className="absolute bottom-30 left-140 opacity-30 pointer-events-none select-none z-10 md:w-[70px] md:h-[70px] w-[40px] h-[40px]"
+          className="absolute bottom-30 left-160 opacity-30 pointer-events-none select-none z-10 md:w-[70px] md:h-[70px] w-[40px] h-[40px]"
           style={{ filter: "grayscale(1)" }}
         />
         <Image
@@ -266,7 +291,7 @@ export default function Home() {
       {/* Features Section */}
       <motion.section
         id="features"
-        className="w-full bg-white py-16 scroll-mt-24"
+        className="w-full bg-white py-30 scroll-mt-24"
         initial={{ opacity: 0, y: 40 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
@@ -311,7 +336,7 @@ export default function Home() {
       {/* How It Works Section */}
       <section
         id="howitworks"
-        className="w-full bg-[#f3f6fa] py-16 scroll-mt-24"
+        className="w-full bg-[#f3f6fa] py-40 scroll-mt-24"
       >
         <div className="max-w-5xl mx-auto flex flex-col items-center">
           <h2 className="text-3xl font-bold text-gray-900 mb-4 text-center">
@@ -360,7 +385,7 @@ export default function Home() {
       </section>
 
       {/* Pricing Section */}
-      <section id="pricing" className="w-full bg-white py-16">
+      <section id="pricing" className="w-full bg-white py-20">
         <div className="max-w-5xl mx-auto flex flex-col items-center">
           <h2 className="text-3xl font-bold text-gray-900 mb-4 text-center">
             Pricing Plans
@@ -375,29 +400,33 @@ export default function Home() {
       {/* Footer */}
       <footer className="w-full bg-white border-t py-6 px-8 flex flex-col md:flex-row items-center justify-between text-gray-500 text-sm">
         <div className="flex items-center gap-2 mb-2 md:mb-0">
-          <Image
-            src="/logo.png"
-            alt="AiCruitier Logo"
-            width={32}
-            height={32}
-            className="h-8 w-auto"
-          />
-          <span className="font-semibold text-gray-900">AiCruitier</span>
+          <span className="font-semibold text-gray-900">StepHire</span>
         </div>
         <div className="flex gap-6 mb-2 md:mb-0">
-          <a href="#" className="hover:text-blue-600 transition">
-            Terms
+          <a
+            href="https://github.com/ashusoni24/Ai-Interview-Scheduler"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:text-blue-600 transition"
+          >
+            <Github /> 
           </a>
-          <a href="#" className="hover:text-blue-600 transition">
-            Privacy
+          <a
+            href="https://www.linkedin.com/in/ashutosh-soni-3b2540251/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:text-blue-600 transition"
+          >
+            <Linkedin /> 
           </a>
-          <a href="#" className="hover:text-blue-600 transition">
-            Contact
+          <a
+            href="mailto:24ashusoni@gmail.com"
+            className="hover:text-blue-600 transition"
+          >
+            <CircleUser /> 
           </a>
         </div>
-        <div className="text-right">
-          &copy; 2025 AiCruitier. All rights reserved.
-        </div>
+        
       </footer>
     </main>
   );
