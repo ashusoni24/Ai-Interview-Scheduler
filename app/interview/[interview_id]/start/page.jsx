@@ -219,16 +219,16 @@ Key Guidelines:
   };
 
   return (
-    <div className="px-5 py-10 lg:px-48 xl:px-56 min-h-screen mt-8">
-      <h2 className="font-bold text-xl flex justify-between">
-        AI Interview Session
-        <span className="flex gap-2 items-center">
-          <Timer />
-          {formatTimer(timer)}
-        </span>
-      </h2>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-7 mt-10">
-        <div className="bg-white h-[400px] rounded-lg border flex flex-col gap-3 items-center justify-center ">
+    <div className="min-h-screen flex flex-col items-center justify-start py-15 px-2 bg-gradient-to-br from-slate-100 via-blue-50 to-purple-50">
+<h2 className="font-bold text-xl flex justify-between w-full max-w-6xl mx-auto">
+  AI Interview Session
+  <span className="flex gap-2 items-center bg-white/80 backdrop-blur px-4 py-2 rounded-full shadow font-mono text-lg font-semibold text-black">
+    <Timer className="h-5 w-5 text-black" />
+    <span className="tracking-widest">{formatTimer(timer)}</span>
+  </span>
+</h2>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-10 mt-10 w-full max-w-7xl mx-auto">
+        <div className="bg-white/80 backdrop-blur rounded-xl shadow-2xl border flex flex-col gap-3 items-center justify-center h-[500px]">
           <div className="relative">
             {!activeUser && (
               <span className="absolute inset-0 rounded-full bg-blue-500 opacity-75 animate-ping"></span>
@@ -243,12 +243,12 @@ Key Guidelines:
           </div>
           <h2>AI Recruiter</h2>
         </div>
-        <div className="bg-white h-[400px] rounded-lg border flex flex-col gap-3 items-center justify-center ">
+        <div className="bg-white/80 backdrop-blur rounded-xl shadow-2xl border flex flex-col gap-3 items-center justify-center h-[500px]">
           <div className="relative">
             {activeUser && (
               <span className="absolute inset-0 rounded-full bg-blue-500 opacity-75 animate-ping"></span>
             )}
-            <h2 className="text-2xl bg-primary text-white h-[50px] w-[50px] p-3 rounded-full px-5.5">
+            <h2 className="text-2xl bg-primary text-white h-[50px] w-[50px] p-3 rounded-full px-5.5 flex items-center justify-center">
               {interviewInfo?.userName[0]}
             </h2>
           </div>
@@ -257,17 +257,14 @@ Key Guidelines:
       </div>
       <div className="flex items-center gap-5 justify-center mt-7">
         <Mic className="h-12 w-12 p-3 bg-gray-500 text-white rounded-full cursor-pointer" />
-        {/*<AlertConfirmation stopInterview={()=>stopInterview()}>*/}
         {!loading ? (
           <Phone
-            className="h-12 w-12 p-3 bg-red-400 text-white rounded-full cursor-pointer
-           "
+            className="h-12 w-12 p-3 bg-red-400 text-white rounded-full cursor-pointer"
             onClick={() => stopInterview()}
           />
         ) : (
           <Loader2Icon className="animate-spin" />
         )}
-        {/*</AlertConfirmation>*/}
       </div>
       <h2 className="text-sm text-gray-400 text-center mt-5">
         Interview in progress...
