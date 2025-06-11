@@ -19,6 +19,7 @@ function LatestInterviewList() {
   let { data: Interviews, error } = await supabase
   .from('Interviews')
   .select('jobPosition,duration,interview_id,created_at,interview-feedback(userEmail)')
+  //changed all data fetch to specific data fetch
   .eq('userEmail',user?.email)
   .order('id',{ascending:false})
   .limit(6)
@@ -27,7 +28,6 @@ function LatestInterviewList() {
   setInterviewList(Interviews);
 
     }
-
     
 
   return (
