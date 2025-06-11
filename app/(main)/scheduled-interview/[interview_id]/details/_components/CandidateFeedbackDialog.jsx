@@ -86,25 +86,19 @@ function CandidateFeedbackDialog({ candidate }) {
               <div>
                 <h2 className="font-bold mb-2">Performance Summary</h2>
                 <div className="p-4 bg-gray-50 rounded-lg text-sm">
-                  {Array.isArray(feedback?.summery) ? (
-                    feedback.summery.map((summery, index) => (
-                      <p key={index} className="mb-1">{summery}</p>
-                    ))
-                  ) : (
-                    <p>{feedback?.summery || "No summary available."}</p>
-                  )}
+                  <p>{feedback?.summary || "No summary available."}</p>
                 </div>
               </div>
               {/* Recommendation */}
-              <div className={`p-4 flex flex-col sm:flex-row items-center justify-between rounded-lg ${feedback.Recommendation === 'Not Recommended' ? 'bg-red-50' : 'bg-green-50'}`}>
+              <div className={`p-4 flex flex-col sm:flex-row items-center justify-between rounded-lg ${feedback.Recommendation === 'No' ? 'bg-red-50' : 'bg-green-50'}`}>
                 <div>
-                  <h2 className={`font-bold ${feedback.Recommendation === 'Not Recommended' ? 'text-red-700' : 'text-green-700'}`}>Recommendation:</h2>
-                  <p className={`mt-1 text-sm ${feedback.Recommendation === 'Not Recommended' ? 'text-red-600' : 'text-green-600'}`}>
+                  <h2 className={`font-bold ${feedback.Recommendation === 'No' ? 'text-red-700' : 'text-green-700'}`}>Recommendation:</h2>
+                  <p className={`mt-1 text-sm ${feedback.Recommendation === 'No' ? 'text-red-600' : 'text-green-600'}`}>
                     {feedback?.RecommendationMsg}
                   </p>
                 </div>
                 <Button
-                  className={`mt-4 sm:mt-0 ${feedback.Recommendation === 'Not Recommended' ? 'bg-red-700 hover:bg-red-800' : 'bg-green-700 hover:bg-green-800'}`}
+                  className={`mt-4 sm:mt-0 ${feedback.Recommendation === 'No' ? 'bg-red-700 hover:bg-red-800' : 'bg-green-700 hover:bg-green-800'}`}
                 >
                   Send Msg
                 </Button>
