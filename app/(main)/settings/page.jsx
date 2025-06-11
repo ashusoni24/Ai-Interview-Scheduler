@@ -31,13 +31,26 @@ export default function SettingsPage() {
           {user?.name || "Settings"}
         </h2>
         <p className="text-gray-500 mb-6">{user?.email}</p>
+        <hr className="w-full border-t border-blue-100 my-4" />
         <div className="w-full flex flex-col gap-4">
           {/* Add more settings here as needed */}
+          <Button
+            className="w-full bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-200 font-semibold py-2 rounded-lg shadow transition"
+            disabled
+          >
+            Change Password (coming soon)
+          </Button>
           <Button
             className="w-full bg-red-500 hover:bg-red-600 text-white font-semibold py-2 rounded-lg shadow transition"
             onClick={handleLogout}
           >
             Logout
+          </Button>
+          <Button
+            className="w-full bg-red-100 text-red-600 font-semibold py-2 rounded-lg shadow transition"
+            disabled
+          >
+            Delete Account (coming soon)
           </Button>
         </div>
       </div>
