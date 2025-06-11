@@ -4,7 +4,7 @@ import Link from "next/link";
 import moment from "moment";
 import { toast } from "sonner";
 
-function InterviewCard({ interview, viewDetail = false }) {
+export const InterviewCard = ({ interview, viewDetail = false })=> {
   const url = `${window.location.origin}/scheduled-interview/${interview?.interview_id}`;
   const copyLink = () => {
     navigator.clipboard.writeText(url);
@@ -46,5 +46,3 @@ function InterviewCard({ interview, viewDetail = false }) {
     </div>
   );
 }
-
-export default InterviewCard;

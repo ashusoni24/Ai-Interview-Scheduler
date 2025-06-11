@@ -1,5 +1,4 @@
 import React from 'react'
-import WelcomeContainer from './_components/welcomecontainer'
 import CreateOptions from './_components/CreateOptions'
 import LatestInterviewList from './_components/LatestInterviewList'
 

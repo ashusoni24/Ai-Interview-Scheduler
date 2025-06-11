@@ -1,10 +1,12 @@
 'use client';
-import InterviewCard from './interviewcard';import { Button } from '@/components/ui/button';
+
+import { Button } from '@/components/ui/button';
 import { useUser } from '@/app/Provider';
 import { supabase } from '@/services/supabseClient';
 import { Camera, Video } from 'lucide-react';
 import React, { useEffect, useState } from 'react'
 import { toast } from 'sonner';
+import { InterviewCard } from './InterviewCard';
 
 function LatestInterviewList() {
     const [interviewList,setInterviewList] = useState([]);
