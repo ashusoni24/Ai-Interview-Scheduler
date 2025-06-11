@@ -1,5 +1,5 @@
     'use client';
-    import { UserDetailContext } from '@/context/userdetailcontext';
+    import { UserDetailContext } from '@/context/UserDetailContext';
     import { supabase } from '@/services/supabseClient';
     import React, { useContext, useEffect, useState } from 'react'
 
