@@ -19,7 +19,7 @@ import { Home, Users, ClipboardList, CreditCard, Settings } from "lucide-react";
 
 const navItems = [
   { href: "/dashboard", label: "Dashboard", icon: <Home size={20} /> },
-  { href: "/scheduled-interview", label: "Scheduled Interview", icon: <ClipboardList size={20} /> },
+  { href: "/scheduled-interview", label: "Feedbacks", icon: <ClipboardList size={20} /> },
   { href: "/all-Interview", label: "All Interview", icon: <Users size={20} /> },
   { href: "/billing", label: "Billing", icon: <CreditCard size={20} /> },
   { href: "/settings", label: "Settings", icon: <Settings size={20} /> },
