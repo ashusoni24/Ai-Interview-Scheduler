@@ -1,3 +1,4 @@
+import BillingCredits from "./_components/BillingCredits";
 import { CreditCard, CheckCircle2 } from "lucide-react";
 
 const plans = [
@@ -29,20 +30,12 @@ const plans = [
 ];
 
 export default function BillingPage() {
-	// Replace with real data
-	const creditsLeft = 1;
-
 	return (
 		<div className="p-8">
 			<h2 className="text-2xl font-bold mb-1">Billing</h2>
 			<p className="text-gray-500 mb-6">Manage your Payment and credits</p>
 			<div className="flex flex-col md:flex-row gap-8">
-				<div className="flex-1 bg-gradient-to-br from-blue-50 to-white rounded-2xl shadow-lg p-6 flex flex-col items-center justify-center border border-blue-100">
-					<CreditCard className="text-blue-500 bg-blue-100 rounded-full p-2 mb-3" size={40} />
-					<div className="text-lg font-semibold mb-1">Your Credits</div>
-					<div className="text-3xl font-bold text-blue-700 mb-2">{creditsLeft} interviews left</div>
-					<div className="text-gray-400 text-sm">Current usage and remaining credits</div>
-				</div>
+				<BillingCredits />
 				<div className="flex-[2] grid grid-cols-1 md:grid-cols-3 gap-6">
 					{plans.map((plan) => (
 						<div
